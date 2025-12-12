@@ -1,4 +1,4 @@
-# Läggs i .zshrc
+# Scriptet är placerat i .zshrc
 
 # Det ser till att din virtuella Python-miljö (.venv) aktiveras automatiskt 
 # när du går in i en mapp som har en sådan, och avaktiveras när du går därifrån.
