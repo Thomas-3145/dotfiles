@@ -133,6 +133,7 @@ function qs() {
     curl -s "https://cht.sh/$1" | less -R
 }
 
+
 # DevOps Dashboard vid start
 function dashboard() {
     echo -e "\e[1;36m🚀 Systemstatus för $HOST\e[0m"
@@ -144,6 +145,12 @@ function dashboard() {
     # Diskutrymme (Root)
     local DISK=$(df -h / | awk 'NR==2 {print $5}')
     echo -e "\e[34m󰋊 Diskutrymme:\e[0m    $DISK använt"
+
+    # Senaste systemuppdatering (Hämtas från din nya timer)
+    local LAST_UPDATE=$(systemctl show daily-update.service --property=InactiveExitTimestamp --value)
+    if [[ -n "$LAST_UPDATE" && "$LAST_UPDATE" != "n/a" ]]; then
+        echo -e "\e[35m󰚰 Senaste update:\e[0m $LAST_UPDATE"
+    fi
 
     # Docker-status
     if command -v docker &> /dev/null; then
