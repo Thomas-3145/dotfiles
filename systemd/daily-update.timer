@@ -1,0 +1,9 @@
+[Unit]
+Description=Kör systemuppdatering var 24:e timme
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
