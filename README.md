@@ -28,7 +28,7 @@ DevOps Dashboard
 Visar RAM, Disk och Docker-status varje gång terminalen öppnas.
 
 Auto-venv  
-Aktiverar Python `.venv` automatiskt när du går in i en projektmapp.
+Aktiverar Python .venv automatiskt när du går in i en projektmapp.
 
 Anteckningssystem  
 n [namn] – skapa/öppna markdown-anteckning i ~/notes  
@@ -104,3 +104,26 @@ sudo systemctl enable --now logid
 ### 4. Ladda om konfigurationen
 
 source ~/.zshrc
+
+---
+
+### 5. Aktivera automatiska uppdateringar
+
+För att datorn ska sköta systemuppdateringar automatiskt var 24:e timme:
+
+sudo cp ~/dotfiles/systemd/daily-update.* /etc/systemd/system/  
+sudo systemctl daemon-reload  
+sudo systemctl enable --now daily-update.timer  
+
+---
+
+### Varför är detta viktigt?
+
+Filerna i ~/dotfiles/systemd/ är endast kopior (backuper).  
+Ingenting körs automatiskt bara för att de ligger där.
+
+För att systemd ska använda dem måste de kopieras till  
+/etc/systemd/system/.
+
+Genom att dokumentera detta i README slipper du komma ihåg
+exakta systemctl-kommandon nästa gång du installerar om datorn.
