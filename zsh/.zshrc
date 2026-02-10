@@ -14,8 +14,7 @@ zstyle ':omz:update' mode auto
 
 # Plugins
 zstyle :omz:plugins:ssh-agent identities id_rsa_4096
-plugins=(git ssh-agent z zsh-autosuggestions zsh-syntax-highlighting)
-
+plugins=(git ssh-agent z zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # =========================================================
@@ -50,9 +49,6 @@ alias media="ssh media"
 alias 3145="ssh 3145"
 alias proxmox="ssh proxmox"
 
-alias ubuntuserver="ssh thomas@192.168.122.7 -p 22456"
-alias fedoraserver="ssh thomas@192.168.122.41 -p 22456"
-
 # DevOps Docker-genvägar
 alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dlogs="docker logs -f"
@@ -61,28 +57,87 @@ alias dclean="docker system prune -af --volumes"
 # lazydocker & lazygit
 alias lg="lazygit"
 alias ld="lazydocker"
-# =========================================================
-# 4. ANTECKNINGSSYSTEM (Notes)
-# =========================================================
-NOTES_DIR=~/notes
 
-# Gå direkt till anteckningarna
-alias note="mkdir -p $NOTES_DIR && cd $NOTES_DIR && ls"
 
-# Snabbskapa: n "filnamn"
-function n() {
-    mkdir -p $NOTES_DIR
-    micro "$NOTES_DIR/$1.md"
+# =========================================================
+# 4. ANTECKNINGSSYSTEM
+# =========================================================
+export NOTES_DIR=~/anteckningar
+
+# 1. Gå till anteckningsmappen
+alias anteckningar="mkdir -p $NOTES_DIR && cd $NOTES_DIR && ls"
+
+# 2. Skapa/Redigera anteckning
+function an() {
+    # --- SÄKERHETSSPÄRR ---
+    if [ -z "$1" ]; then
+        echo "❌ Du glömde filnamnet!"
+        echo "👉 Användning: a <filnamn>"
+        return 1
+    fi
+
+    # Bygg sökväg
+    local full_path="$NOTES_DIR/$1.md"
+    local target_dir=$(dirname "$full_path")
+
+    # Skapa mapp om den saknas
+    mkdir -p "$target_dir"
+
+    # --- LOGIK FÖR INNEHÅLL ---
+    if [ ! -f "$full_path" ]; then
+        # SCENARIO 1: Helt ny fil (skapa rubrik)
+        echo "# $(date "+%Y-%m-%d")" > "$full_path"
+        echo "" >> "$full_path"
+    else
+        # SCENARIO 2: Filen finns redan (lägg till tidsstämpel)
+        echo "" >> "$full_path"
+        echo "## $(date "+%Y-%m-%d %H:%M")" >> "$full_path"
+    fi
+
+    # Öppna filen och hoppa till slutet
+    micro +99999 "$full_path"
 }
 
-# Sök: ns "sökord"
-function ns() {
+# 3. Sök (Innehåll)
+function as() {
+    if [ -z "$1" ]; then
+        echo "🔍 Vad vill du söka efter? (Skriv: as sökord)"
+        return 1
+    fi
+
     if command -v rg &> /dev/null; then
-        rg -i "$1" $NOTES_DIR
+        rg -i "$1" "$NOTES_DIR"
     else
-        grep -rni --color=auto "$1" $NOTES_DIR
+        grep -rni --color=auto "$1" "$NOTES_DIR"
     fi
 }
+
+# 4. Hitta "Att Göra" (Smartare sökning)
+function at() {
+    echo "📝 Saker att göra:"
+
+    # Förklaring av sök-mönstret (Regex):
+    # \-      = Ett bindestreck
+    # \s* = Noll eller flera mellanslag (fångar både "-[]" och "- []")
+    # \[      = Vänsterklammer
+    # \s* = Noll eller flera mellanslag (fångar både "[]" och "[ ]")
+    # \]      = Högerklammer
+
+    if command -v rg &> /dev/null; then
+        # -N stänger av radnummer om du vill ha renare lista (valfritt)
+        rg "\-\s*\[\s*\]" "$NOTES_DIR"
+    else
+        # grep -E (Extended regex) för att förstå \s*
+        grep -rE "\-\s*\[\s*\]" "$NOTES_DIR"
+    fi
+}
+
+# 5. Fuzzy Find (Öppna med fzf)
+function af() {
+    # Går till mappen, kör fzf med förhandsvisning, öppnar vald fil i micro
+    cd "$NOTES_DIR" && fzf --preview 'cat {}' | xargs -r micro
+}
+
 
 # =========================================================
 # 5. AUTOMATIK (Venv & Shell Hooks)
@@ -108,15 +163,9 @@ chpwd
 # 6. HJÄLPFUNKTIONER (DevOps & Nätverk)
 # =========================================================
 
-
 function myip() {
-    # Hämta lokal IP snabbt
     local L_IP=$(hostname -I | awk '{print $1}')
-
-    # Hämta Tailscale IP (tystar felmeddelanden om tailscale inte är igång)
     local TS_IP=$(tailscale ip -4 2>/dev/null || echo "Ej aktiv")
-
-    # Hämta publik IP men med en extremt kort timeout (1 sekund)
     local P_IP=$(curl -s --max-time 1 https://ifconfig.me || echo "Offline/Timeout")
 
     echo -e "\e[1;34m╭─ Webb & Nätverk ───────────────────────────╮\e[0m"
@@ -130,16 +179,16 @@ function myip() {
 function extract() {
     if [ -f $1 ] ; then
         case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1      ;;
+            *.tar.bz2)   tar xjf $1      ;;
+            *.tar.gz)    tar xzf $1      ;;
+            *.bz2)       bunzip2 $1      ;;
+            *.rar)       unrar x $1      ;;
+            *.gz)        gunzip $1       ;;
             *.tar)       tar x f $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.7z)        7z x $1        ;;
+            *.tbz2)      tar xjf $1      ;;
+            *.tgz)       tar xzf $1      ;;
+            *.zip)       unzip $1        ;;
+            *.7z)        7z x $1         ;;
             *)           echo "'$1' kan inte packas upp via extract()" ;;
         esac
     else
@@ -147,7 +196,7 @@ function extract() {
     fi
 }
 
-# Snabbhjälp/Cheat sheets (t.ex: qs python eller qs tar)
+# Snabbhjälp
 function qs() {
     curl -s "https://cht.sh/$1" | less -R
 }
@@ -156,31 +205,25 @@ function qs() {
 function dashboard() {
     echo -e "\e[1;36m🚀 Systemstatus för $HOST\e[0m"
 
-    # RAM-användning
+    # RAM
     local RAM=$(free -m | awk '/Mem:/ { printf("%3.1f%%", $3/$2*100) }')
     echo -e "\e[33m󰍛 RAM-användning:\e[0m $RAM"
 
-    # Diskutrymme (Root)
+    # Disk
     local DISK=$(df -h / | awk 'NR==2 {print $5}')
     echo -e "\e[34m󰋊 Diskutrymme:\e[0m    $DISK använt"
 
-    # Senaste systemuppdatering (Hämtas från din nya timer)
+    # Update
     local LAST_UPDATE=$(systemctl show daily-update.service --property=InactiveExitTimestamp --value)
     if [[ -n "$LAST_UPDATE" && "$LAST_UPDATE" != "n/a" ]]; then
         echo -e "\e[35m󰚰 Senaste update:\e[0m $LAST_UPDATE"
     fi
 
-
-
-# CPU Temperatur (Uppdaterad för din hårdvara)
+    # CPU Temperatur
     local TEMP=""
-
-    # 1. Försök använda 'sensors' för att hitta "Package id 0" (Din CPU)
     if command -v sensors &> /dev/null; then
         TEMP=$(sensors | awk '/Package id 0/ {print $4}' | tr -d '+')
     fi
-
-    # 2. Fallback: Om sensors misslyckas, läs från filsystemet
     if [[ -z "$TEMP" ]]; then
         if [ -f /sys/class/thermal/thermal_zone0/temp ]; then
             local TEMP_RAW=$(cat /sys/class/thermal/thermal_zone0/temp)
@@ -189,15 +232,9 @@ function dashboard() {
             TEMP="N/A"
         fi
     fi
-
     echo -e "\e[31m CPU Temp:\e[0m       $TEMP"
 
-
-
-
-
-
-    # Docker-status
+    # Docker
     if command -v docker &> /dev/null; then
         local D_RUNNING=$(docker ps -q | wc -l)
         if [ "$D_RUNNING" -gt 0 ]; then
@@ -209,28 +246,22 @@ function dashboard() {
     echo ""
 }
 
-# Kör dashboard vid interaktiv start
+# Kör dashboard
 [[ $- == *i* ]] && dashboard
 
-
-# Visa alla öppna portar och vilka program som kör dem
+# Portar
 alias ports="sudo lsof -i -P -n | grep LISTEN"
 
-
-# Skicka fil till homelab-server (Användning: send fil.txt <3145> eller <media>)
+# Skicka fil
 function send() {
     if [ $# -ne 2 ]; then
         echo "Användning: send [fil] [server-alias]"
         return 1
     fi
-
     local FILE=$1
     local SERVER=$2
-
     echo -e "\e[34m📤 Skickar $FILE till $SERVER...\e[0m"
-    # scp använder samma inställningar som ssh, så dina alias fungerar!
     scp "$FILE" "$SERVER:~/"
-
     if [ $? -eq 0 ]; then
         echo -e "\e[32m✅ Klar! Filen ligger i hemkatalogen på $SERVER\e[0m"
     else
