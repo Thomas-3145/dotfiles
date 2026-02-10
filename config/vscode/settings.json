@@ -4,15 +4,21 @@
 
 // Place your key bindings in this file to override the defaults
 
-
 {
-    /* --- NYTT: Här startar terminalen om ingen annan mapp är vald --- */
+    /* --- SÖKVÄGAR --- */
     "terminal.integrated.cwd": "/home/thomas/vscode",
-
-    /* --- VIKTIGT: Uppdaterad sökväg till din venv efter flytten --- */
     "python.defaultInterpreterPath": "/home/thomas/vscode/Python/Skola/.venv",
 
-    /* --- DINA TIDIGARE INSTÄLLNINGAR --- */
+    /* --- STÄDNING --- */
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.scrollbar.vertical": "hidden",
+    "editor.hideCursorInOverviewRuler": true,
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+    "terminal.integrated.minimap.enabled": false,
+    "terminal.integrated.stickyScroll.enabled": false,
+
+    /* --- GRUNDINSTÄLLNINGAR --- */
     "workbench.panel.defaultLocation": "right",
     "terminal.integrated.allowChords": false,
     "terminal.integrated.commandsToSkipShell": [
@@ -20,75 +26,94 @@
         "workbench.action.nextEditor"
     ],
     "workbench.colorTheme": "Dracula At Night",
-    
+
     "editor.minimap.renderCharacters": false,
-    "editor.minimap.enabled": false,
     "github.copilot.nextEditSuggestions.enabled": false,
     "claudeCode.preferredLocation": "panel",
     "workbench.startupEditor": "none",
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "jsonc": false,
-        "dockerfile": false
-    },
+    "github.copilot.enable": { "*": false },
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js",
         "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
         "*.jsx": "${capture}.js",
         "*.tsx": "${capture}.ts",
         "tsconfig.json": "tsconfig.*.json",
-        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
-        "*.sqlite": "${capture}.${extname}-*",
-        "*.db": "${capture}.${extname}-*",
-        "*.sqlite3": "${capture}.${extname}-*",
-        "*.db3": "${capture}.${extname}-*",
-        "*.sdb": "${capture}.${extname}-*",
-        "*.s3db": "${capture}.${extname}-*"
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock"
     },
+
+    /* --- SYNTAX HIGHLIGHTING (High Contrast) --- */
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": ["comment", "punctuation.definition.comment"],
+                "settings": { "foreground": "#999999", "fontStyle": "italic" }
+            },
+            {
+                "scope": ["string"],
+                "settings": { "foreground": "#ffff55" }
+            },
+            {
+                "scope": ["keyword", "storage"],
+                "settings": { "foreground": "#ff55ff", "fontStyle": "bold" }
+            }
+        ]
+    },
+
+    /* --- FÄRGER & BORDERS --- */
     "workbench.colorCustomizations": {
+        /* NYTT: Neon-linjer mellan fönstren */
+        "panel.border": "#bd93f9",       /* Linje mellan Kod och Terminal (Höger) */
+        "sideBar.border": "#bd93f9",     /* Linje mellan Filhanterare och Kod (Vänster) */
+        "editorGroup.border": "#bd93f9", /* Linje om du delar koden i två fönster */
+
+        /* Osynlig scrollbar */
+        "scrollbarSlider.background": "#00000000",
+        "scrollbarSlider.hoverBackground": "#00000000",
+        "scrollbarSlider.activeBackground": "#00000000",
+
+        /* Bakgrunder (Svart) */
         "editor.background": "#000000",
         "sideBar.background": "#000000",
         "activityBar.background": "#000000",
         "panel.background": "#000000",
-        "statusBar.background": "#000000",
+        "terminal.background": "#000000",
+
+        /* Text (Kritvit) */
+        "foreground": "#ffffff",
+        "editor.foreground": "#ffffff",
+        "sideBar.foreground": "#ffffff",
+        "activityBar.foreground": "#ffffff",
+        "panelTitle.activeForeground": "#ffffff",
+        "terminal.foreground": "#ffffff",
+        "terminalCursor.foreground": "#00ff00",
+
+        /* Terminal Neon Colors */
+        "terminal.ansiBlack": "#444444",
+        "terminal.ansiRed": "#ff0000",
+        "terminal.ansiGreen": "#00ff00",
+        "terminal.ansiYellow": "#ffff00",
+        "terminal.ansiBlue": "#0088ff",
+        "terminal.ansiMagenta": "#ff00ff",
+        "terminal.ansiCyan": "#00ffff",
+        "terminal.ansiWhite": "#ffffff",
+
+        "terminal.ansiBrightBlack": "#777777",
+        "terminal.ansiBrightRed": "#ff3333",
+        "terminal.ansiBrightGreen": "#33ff33",
+        "terminal.ansiBrightYellow": "#ffff33",
+        "terminal.ansiBrightBlue": "#3399ff",
+        "terminal.ansiBrightMagenta": "#ff33ff",
+        "terminal.ansiBrightCyan": "#33ffff",
+        "terminal.ansiBrightWhite": "#ffffff",
+
+        /* UI Borders */
         "titleBar.activeBackground": "#000000",
         "titleBar.inactiveBackground": "#000000",
         "editorGroupHeader.tabsBackground": "#000000",
         "tab.inactiveBackground": "#000000",
         "tab.activeBackground": "#000000",
-        "breadcrumb.background": "#000000",
-        "menu.background": "#000000",
-        "terminal.background": "#000000",
-        "terminal.foreground": "#f8f8f2",
-        "terminalCursor.foreground": "#f8f8f2",
-        "terminal.ansiBlack": "#21222c",
-        "terminal.ansiRed": "#ff5555",
-        "terminal.ansiGreen": "#50fa7b",
-        "terminal.ansiYellow": "#f1fa8c",
-        "terminal.ansiBlue": "#bd93f9",
-        "terminal.ansiMagenta": "#ff79c6",
-        "terminal.ansiCyan": "#8be9fd",
-        "terminal.ansiWhite": "#f8f8f2",
-        "terminal.ansiBrightBlack": "#6272a4",
-        "terminal.ansiBrightRed": "#ff6e6e",
-        "terminal.ansiBrightGreen": "#69ff94",
-        "terminal.ansiBrightYellow": "#ffffa5",
-        "terminal.ansiBrightBlue": "#d6acff",
-        "terminal.ansiBrightMagenta": "#ff92df",
-        "terminal.ansiBrightCyan": "#a4ffff",
-        "terminal.ansiBrightWhite": "#ffffff",
-        "panelTitle.activeForeground": "#f8f8f2",
-        "panelTitle.inactiveForeground": "#6272a4",
-        "panelTitle.activeBorder": "#ff79c6",
-        "titleBar.activeForeground": "#f8f8f2",
-        "titleBar.inactiveForeground": "#6272a4",
-        "breadcrumb.foreground": "#f8f8f2",
-        "breadcrumb.focusForeground": "#f8f8f2",
-        "breadcrumb.activeSelectionForeground": "#ff79c6",
-        "menubar.selectionBackground": "#44475a",
-        "menu.foreground": "#f8f8f2"
+        "tab.activeForeground": "#ffffff",
+        "tab.border": "#000000",
+        "contrastBorder": "#000000"
     }
 }
