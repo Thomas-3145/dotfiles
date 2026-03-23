@@ -3,8 +3,6 @@
 // Place your key bindings in this file to override the defaults
 
 {
-    /* --- SÖKVÄGAR --- */
-    "terminal.integrated.cwd": "/home/thomas/vscode",
     "python.defaultInterpreterPath": "/home/thomas/vscode/Python/Skola/.venv",
 
     /* --- STÄDNING --- */
@@ -129,5 +127,12 @@
         "tab.activeBackground": "#000000",
         "tab.activeForeground": "#ffffff",
         "tab.activeBorder": "#000000"
+    },
+    "window.restoreWindows": "folders",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "terminal.integrated.customGlyphs": false,
+    "redhat.telemetry.enabled": true,
+    "yaml.schemas": {
+        "kubernetes": "*.yaml"
     }
 }

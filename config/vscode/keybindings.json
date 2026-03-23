@@ -120,5 +120,24 @@
     { "key": "alt+down", "command": "-notebook.cell.moveDown", "when": "notebookEditorFocused && !inputFocus" },
     { "key": "alt+up", "command": "-notebook.cell.moveUp", "when": "notebookEditorFocused && !inputFocus" },
     { "key": "alt+down", "command": "-editor.action.pageDownHover", "when": "editorHoverFocused" },
-    { "key": "alt+up", "command": "-editor.action.pageUpHover", "when": "editorHoverFocused" }
+    {
+        "key": "alt+up",
+        "command": "-editor.action.pageUpHover",
+        "when": "editorHoverFocused"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    }
 ]

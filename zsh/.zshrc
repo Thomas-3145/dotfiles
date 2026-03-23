@@ -47,6 +47,7 @@ source <(fzf --zsh)
 # =========================================================
 alias nano="micro"
 alias rg="rg --smart-case"
+alias grep="grep -i --color=auto"
 alias reload="source ~/.zshrc && echo 'Config laddad!'"
 alias cat='bat'
 alias top='btop'
@@ -54,7 +55,6 @@ alias memtjuvar="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -n 10"
 
 # SSH Servrar
 alias router="ssh router"
-alias media="ssh media"
 alias 3145="ssh 3145"
 alias proxmox="ssh proxmox"
 
@@ -70,17 +70,16 @@ alias ld="lazydocker"
 # =========================================================
 # 4. ANTECKNINGSSYSTEM
 # =========================================================
-export NOTES_DIR=~/anteckningar
+export NOTES_DIR="$HOME/Dokument/Obsidian Vault/anteckningar"
+alias anteckningar='cd "$NOTES_DIR" && ls'
+alias an=anteckning
 
-# 1. Gå till anteckningsmappen
-alias anteckningar="mkdir -p $NOTES_DIR && cd $NOTES_DIR && ls"
-
-# 2. Skapa/Redigera anteckning
-function an() {
+# 1. Skapa/Redigera anteckning
+function anteckning() {
     # --- SÄKERHETSSPÄRR ---
     if [ -z "$1" ]; then
-        echo "❌ Du glömde filnamnet!"
-        echo "👉 Användning: a <filnamn>"
+        echo "Du glömde filnamnet!"
+        echo "Användning: anteckning <filnamn>"
         return 1
     fi
 
@@ -106,43 +105,8 @@ function an() {
     micro +99999 "$full_path"
 }
 
-# 3. Sök (Innehåll)
+# 3. Fuzzy-sök (Öppna med fzf)
 function as() {
-    if [ -z "$1" ]; then
-        echo "🔍 Vad vill du söka efter? (Skriv: as sökord)"
-        return 1
-    fi
-
-    if command -v rg &> /dev/null; then
-        rg -i "$1" "$NOTES_DIR"
-    else
-        grep -rni --color=auto "$1" "$NOTES_DIR"
-    fi
-}
-
-# 4. Hitta "Att Göra" (Smartare sökning)
-function at() {
-    echo "📝 Saker att göra:"
-
-    # Förklaring av sök-mönstret (Regex):
-    # \-      = Ett bindestreck
-    # \s* = Noll eller flera mellanslag (fångar både "-[]" och "- []")
-    # \[      = Vänsterklammer
-    # \s* = Noll eller flera mellanslag (fångar både "[]" och "[ ]")
-    # \]      = Högerklammer
-
-    if command -v rg &> /dev/null; then
-        # -N stänger av radnummer om du vill ha renare lista (valfritt)
-        rg "\-\s*\[\s*\]" "$NOTES_DIR"
-    else
-        # grep -E (Extended regex) för att förstå \s*
-        grep -rE "\-\s*\[\s*\]" "$NOTES_DIR"
-    fi
-}
-
-# 5. Fuzzy Find (Öppna med fzf)
-function af() {
-    # Går till mappen, kör fzf med förhandsvisning, öppnar vald fil i micro
     cd "$NOTES_DIR" && fzf --preview 'cat {}' | xargs -r micro
 }
 
@@ -156,12 +120,12 @@ function chpwd() {
     if [ -d ".venv" ]; then
         if [[ "$VIRTUAL_ENV" == "" ]]; then
             source .venv/bin/activate
-            echo "🐍 .venv aktiverad!"
+            echo ".venv aktiverad"
         fi
     elif [[ "$VIRTUAL_ENV" != "" ]]; then
         if typeset -f deactivate > /dev/null; then
             deactivate
-            echo "👋 .venv avaktiverad"
+            echo ".venv avaktiverad"
         fi
     fi
 }
@@ -261,12 +225,24 @@ function qs() {
 
 
 # --- SNABBMENY ---
-echo -e "\n\e[1;34m⚡ Snabbkommandon\e[0m"
-echo -e "  \e[36man\e[0m <namn>     Skapa/redigera anteckning"
-echo -e "  \e[36mas\e[0m <sökord>   Sök i innehåll"
-echo -e "  \e[36mat\e[0m            Visa alla att-göra"
-echo -e "  \e[36maf\e[0m            Fuzzy-sök med förhandsvisning"
-echo -e "  \e[36manteckningar\e[0m  Gå till anteckningar-mappen"
+echo -e "\n\e[1;34mSnabbkommandon\e[0m"
+echo -e "  \e[1;33mGit\e[0m"
+echo -e "  \e[36mgs\e[0m             git status --short --branch"
+echo -e "  \e[36mga\e[0m <fil/path>  git add"
+echo -e "  \e[36mgcm\e[0m <text>     git commit -m"
+echo -e "  \e[36mgp\e[0m             git push"
+echo -e "  \e[36mgpl\e[0m            git pull --rebase"
+echo -e "  \e[36mgundo\e[0m          ångra senaste commit (behåller ändringar)"
+echo -e ""
+echo -e "  \e[1;33mAnteckningar\e[0m"
+echo -e "  \e[36manteckning\e[0m <namn>  skapa/redigera anteckning"
+echo -e "  \e[36manteckningar\e[0m       gå till Obsidian-mappen"
+echo -e "  \e[36mas\e[0m                 fuzzy-sök med förhandsvisning"
+echo -e ""
+echo -e "  \e[1;33mÖvrigt\e[0m"
+echo -e "  \e[36mmd\e[0m <namn>          skapa mapp och gå in i den"
+echo -e "  \e[36mkalk\e[0m <uttryck>     miniräknare (ex: kalk 2*2)"
+echo -e "  \e[36mfd\e[0m <mönster>       sök filer (ex: fd .yaml)"
 
 
 
@@ -287,12 +263,12 @@ function send() {
     fi
     local FILE=$1
     local SERVER=$2
-    echo -e "\e[34m📤 Skickar $FILE till $SERVER...\e[0m"
+    echo -e "\e[34mSkickar $FILE till $SERVER...\e[0m"
     scp "$FILE" "$SERVER:~/"
     if [ $? -eq 0 ]; then
-        echo -e "\e[32m✅ Klar! Filen ligger i hemkatalogen på $SERVER\e[0m"
+        echo -e "\e[32mKlar! Filen ligger i hemkatalogen på $SERVER\e[0m"
     else
-        echo -e "\e[31m❌ Något gick fel vid överföringen.\e[0m"
+        echo -e "\e[31mNågot gick fel vid överföringen.\e[0m"
     fi
 }
 
@@ -309,3 +285,37 @@ function _kalk() {
 # 2. Aliaset 'kalk' som stänger av fil-sökning (noglob)
 # Detta gör att du kan skriva 2*2 utan att Zsh letar efter filer.
 alias kalk='noglob _kalk'
+
+
+
+# ---------------------
+
+unalias md
+md() {
+  mkdir -p "$1" && cd "$1"
+}
+
+
+alias k="kubectl"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH="$HOME/.local/bin:$PATH"
+
+
+
+# alias k8s-bok="ssh ubuntu@192.168.10.51"
+
+alias k8s-bok="ssh ubuntu@100.101.190.57"
+alias kns="kubectl config view --minify | grep namespace"
+
+# =========================================================
+# 8. GIT ALIASES
+# =========================================================
+alias gs="git status --short"
+alias gsb="git status --short --branch"
+alias ga="git add"
+alias gcm='git commit -m'
+alias gp="git push"
+alias gpl="git pull --rebase"
+alias gundo="git undo"
