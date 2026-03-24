@@ -173,61 +173,18 @@ function extract() {
     fi
 }
 
-# Snabbhjälp (GRYM! Testa: qs python)
-function qs() {
-    curl -s "https://cht.sh/$1" | less -R
-}
 
 
 
 
-
-
-# DevOps Dashboard vid start
-# function dashboard() {
-    # if [ ! -d "$NOTES_DIR" ]; then
-        # echo -e "\n\e[33m📝 Inga anteckningar än. Skapa din första med: an filnamn\e[0m\n"
-        # return
-    # fi
-#
-    # echo -e "\n\e[1;32m🧠 Second Brain\e[0m"
-#
-    # # Räkna filer
-    # local NOTE_COUNT=$(find "$NOTES_DIR" -name "*.md" | wc -l)
-#
-    # # Räkna ofärdiga To-Dos
-    # local TODO_COUNT=$(grep -r "\- \[ \]" "$NOTES_DIR" 2>/dev/null | wc -l)
-#
-    # echo -e "  \e[36m📝 Totalt:\e[0m $NOTE_COUNT anteckningar · $TODO_COUNT att göra\n"
-#
-    # # --- SENASTE 3 ANTECKNINGARNA ---
-    # echo -e "\e[1;35m📂 Senaste anteckningar\e[0m"
-    # find "$NOTES_DIR" -name "*.md" -type f -printf '%T@ %p\n' 2>/dev/null | \
-        # sort -rn | head -n 3 | while read timestamp filepath; do
-        # local filename=$(basename "$filepath" .md)
-        # local relpath=$(realpath --relative-to="$NOTES_DIR" "$filepath" | sed 's/.md$//')
-        # echo -e "  \e[33m→\e[0m $relpath"
-    # done
-#
-    # # --- TOP 5 OFÄRDIGA TODOS ---
-    # if [ "$TODO_COUNT" -gt 0 ]; then
-        # echo -e "\n\e[1;31m✅ Att göra (Top 5)\e[0m"
-        # grep -rn "\- \[ \]" "$NOTES_DIR" 2>/dev/null | head -n 5 | while IFS=: read -r filepath linenum content; do
-            # local filename=$(basename "$filepath" .md)
-            # local todo=$(echo "$content" | sed 's/^[[:space:]]*-[[:space:]]*\[[[:space:]]*\][[:space:]]*//')
-            # echo -e "  \e[33m→\e[0m $todo \e[90m($filename)\e[0m"
-        # done
-    # fi
-#
-    # echo ""
-# }
 
 
 
 # --- SNABBMENY ---
 echo -e "\n\e[1;34mSnabbkommandon\e[0m"
 echo -e "  \e[1;33mGit\e[0m"
-echo -e "  \e[36mgs\e[0m             git status --short --branch"
+echo -e "  \e[36mgs\e[0m             git status --short
+  \e[36mgsb\e[0m            git status --short --branch"
 echo -e "  \e[36mga\e[0m <fil/path>  git add"
 echo -e "  \e[36mgcm\e[0m <text>     git commit -m"
 echo -e "  \e[36mgp\e[0m             git push"
@@ -239,6 +196,12 @@ echo -e "  \e[36manteckning\e[0m <namn>  skapa/redigera anteckning"
 echo -e "  \e[36manteckningar\e[0m       gå till Obsidian-mappen"
 echo -e "  \e[36mas\e[0m                 fuzzy-sök med förhandsvisning"
 echo -e ""
+echo -e "  \e[1;33mKubernetes\e[0m"
+echo -e "  \e[36mk\e[0m                  kubectl"
+echo -e "  \e[36mkns\e[0m                visa nuvarande namespace"
+echo -e "  \e[36mkubens\e[0m <ns>        byt namespace"
+echo -e "  \e[36mkubectx\e[0m <ctx>      byt kluster"
+echo -e ""
 echo -e "  \e[1;33mÖvrigt\e[0m"
 echo -e "  \e[36mmd\e[0m <namn>          skapa mapp och gå in i den"
 echo -e "  \e[36mkalk\e[0m <uttryck>     miniräknare (ex: kalk 2*2)"
@@ -249,8 +212,6 @@ echo -e "  \e[36mfd\e[0m <mönster>       sök filer (ex: fd .yaml)"
 
 
 
-# STARTKNAPPEN: Kör dashboard om vi är i en terminal
-# [[ $- == *i* ]] && dashboard  # Kommenterad eftersom dashboard-funktionen är avstängd
 
 # Portar
 alias ports="sudo lsof -i -P -n | grep LISTEN"
@@ -296,16 +257,10 @@ md() {
 }
 
 
+
+
+
 alias k="kubectl"
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-export PATH="$HOME/.local/bin:$PATH"
-
-
-
-# alias k8s-bok="ssh ubuntu@192.168.10.51"
-
 alias k8s-bok="ssh ubuntu@100.101.190.57"
 alias kns="kubectl config view --minify | grep namespace"
 
