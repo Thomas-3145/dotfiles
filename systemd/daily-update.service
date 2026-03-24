@@ -1,7 +1,9 @@
 [Unit]
 Description=Daglig systemuppdatering
+Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=oneshot
+ExecStartPre=/bin/sleep 30
 ExecStart=/usr/bin/dnf upgrade -y

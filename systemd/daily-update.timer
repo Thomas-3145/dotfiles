@@ -4,6 +4,7 @@ Description=Kör systemuppdatering var 24:e timme
 [Timer]
 OnCalendar=daily
 Persistent=true
+RandomizedDelaySec=10min
 
 [Install]
 WantedBy=timers.target

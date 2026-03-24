@@ -70,7 +70,7 @@ alias ld="lazydocker"
 # =========================================================
 # 4. ANTECKNINGSSYSTEM
 # =========================================================
-export NOTES_DIR="$HOME/Dokument/Obsidian Vault/anteckningar"
+export NOTES_DIR="$HOME/dokument/obsidian/3145"
 alias anteckningar='cd "$NOTES_DIR" && ls'
 alias an=anteckning
 
@@ -261,7 +261,7 @@ md() {
 
 
 alias k="kubectl"
-alias k8s-bok="ssh ubuntu@100.101.190.57"
+alias k8s-bok="ssh ubuntu@192.168.10.51"
 alias kns="kubectl config view --minify | grep namespace"
 
 # =========================================================
