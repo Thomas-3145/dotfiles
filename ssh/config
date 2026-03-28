@@ -1,13 +1,25 @@
-Host 3145 # (192.168.20.10)
-    HostName 100.110.160.88
+Host 192.168.10.2* 192.168.10.5*
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa_4096
+    Port 22456
+
+Host 3145
+    HostName 3145.taild78f1d.ts.net
     User thomas
     IdentityFile ~/.ssh/id_rsa_4096
     Port 22456
 
-Host proxmox # (192.168.10.20)
-	HostName 100.87.35.119
-	User root
+Host pve1
+    HostName pve1.taild78f1d.ts.net
+    User root
     IdentityFile ~/.ssh/id_rsa_4096
+    Port 22456
+
+Host pve2
+    HostName pve2.taild78f1d.ts.net
+    User root
+    IdentityFile ~/.ssh/id_rsa_4096
+    Port 22456
 
 Host router
     HostName 192.168.8.1
@@ -18,10 +30,5 @@ Host router
 Host ssh_Github
     HostName Github.com
     User git
-    IdentityFile ~/.ssh/id_rsa_4096
-
-Host k8s-bok
-    Hostname 100.101.190.57
-    user ubuntu
     IdentityFile ~/.ssh/id_rsa_4096
 

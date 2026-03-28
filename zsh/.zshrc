@@ -56,8 +56,9 @@ alias memtjuvar="ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -n 10"
 # SSH Servrar
 alias router="ssh router"
 alias 3145="ssh 3145"
-alias proxmox="ssh proxmox"
-
+alias pve1="ssh pve1"
+alias pve2="ssh pve2
+"
 # DevOps Docker-genvägar
 alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
 alias dlogs="docker logs -f"
@@ -70,7 +71,7 @@ alias ld="lazydocker"
 # =========================================================
 # 4. ANTECKNINGSSYSTEM
 # =========================================================
-export NOTES_DIR="$HOME/dokument/obsidian/3145"
+export NOTES_DIR="$HOME/Dokument/Obsidian Vault/anteckningar"
 alias anteckningar='cd "$NOTES_DIR" && ls'
 alias an=anteckning
 
@@ -183,9 +184,11 @@ function extract() {
 # --- SNABBMENY ---
 echo -e "\n\e[1;34mSnabbkommandon\e[0m"
 echo -e "  \e[1;33mGit\e[0m"
-echo -e "  \e[36mgs\e[0m             git status --short
-  \e[36mgsb\e[0m            git status --short --branch"
-echo -e "  \e[36mga\e[0m <fil/path>  git add"
+echo -e "  \e[36mgs\e[0m             git status (branch + filer)"
+echo -e "  \e[36mgb\e[0m             git fetch + visa alla branches"
+echo -e "  \e[36mgsw\e[0m <branch>   byt branch"
+echo -e "  \e[36mga\e[0m <fil>       git add"
+echo -e "  \e[36mgaa\e[0m            git add . (allt)"
 echo -e "  \e[36mgcm\e[0m <text>     git commit -m"
 echo -e "  \e[36mgp\e[0m             git push"
 echo -e "  \e[36mgpl\e[0m            git pull --rebase"
@@ -267,10 +270,34 @@ alias kns="kubectl config view --minify | grep namespace"
 # =========================================================
 # 8. GIT ALIASES
 # =========================================================
-alias gs="git status --short"
-alias gsb="git status --short --branch"
+# Info
+alias gs="git status --short --branch"
+alias gb="git fetch && git branch -a"
+
+# Navigera
+alias gsw="git switch"
+
+# Staging & commit
 alias ga="git add"
+alias gaa="git add ."
 alias gcm='git commit -m'
+alias gundo="git undo"
+
+# Remote
 alias gp="git push"
 alias gpl="git pull --rebase"
-alias gundo="git undo"
+
+
+
+gfz() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" | fzf-tmux -d $(( 2 + $(echo "$branches" | wc -l) )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+
+
+
+alias tree="tree -L"
+alias homelab="cd /home/thomas/dev/3145"
