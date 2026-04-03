@@ -129,6 +129,13 @@ function chpwd() {
             echo ".venv avaktiverad"
         fi
     fi
+
+    if [ -f ".env" ]; then
+        set -a
+        source .env
+        set +a
+        echo ".env laddad"
+    fi
 }
 chpwd
 
