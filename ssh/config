@@ -1,4 +1,4 @@
-Host 192.168.10.2* 192.168.10.5*
+Host 192.168.10.2* 192.168.10.3* 192.168.10.5*
     User ubuntu
     IdentityFile ~/.ssh/id_rsa_4096
     Port 22456

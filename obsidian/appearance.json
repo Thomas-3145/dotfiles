@@ -1,4 +1,5 @@
 {
   "cssTheme": "Dracula Plus",
-  "accentColor": "#8a5cf5"
+  "accentColor": "#8a5cf5",
+  "showRibbon": true
 }

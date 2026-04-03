@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "714535d04de1d8b9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "studier/k8s-bok/5/Namespaces.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Namespaces"
-            }
-          },
-          {
             "id": "2311d6dc0e3eaf93",
             "type": "leaf",
             "pinned": true,
@@ -36,9 +22,57 @@
               "icon": "lucide-file",
               "title": "Lösa anteckningar att sortera"
             }
+          },
+          {
+            "id": "627a32ebbd816eed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ClusterIP, NodePort och LoadBalancer"
+            }
+          },
+          {
+            "id": "7556c48e79c336a8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ClusterIP, NodePort och LoadBalancer"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
+      },
+      {
+        "id": "bc8d3be7bcfbb167",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0a735f32c627c799",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "anteckningar/Anteckningar med länkar.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Anteckningar med länkar"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -95,7 +129,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 277.5
   },
   "right": {
     "id": "75b3d59c806df766",
@@ -200,43 +234,48 @@
       "bases:Skapa ny bas": false
     }
   },
-  "active": "2311d6dc0e3eaf93",
+  "active": "0a735f32c627c799",
   "lastOpenFiles": [
-    "studier/k8s-bok/5/Namespaces.md",
+    "3145/ibindex-app/README.md",
+    "3145/ibindex-app",
+    "3145/ibindex-portfolio/README.md",
+    "3145/ibindex-portfolio/README.md.tmp.48467.1775214162116",
+    "3145/ibindex-portfolio",
+    "studier/skolprojekt/Continuous Deployment/string_calculator.py",
+    "studier/skolprojekt/tdd/__pycache__/test_string_calculator.cpython-314-pytest-9.0.2.pyc.36007",
+    "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
+    "studier/skolprojekt/tdd/notes.md",
+    "studier/skolprojekt/Continuous Deployment/uppgift.md",
+    "studier/skolprojekt/Continuous Deployment",
+    "studier/k8s-bok/7. Kubernetes Services/Labels och EndpointSlices.md",
+    "studier/k8s-bok/8. Ingress/Ingress.md",
+    "studier/k8s-bok/6. Deployments/Pods, Deployments & StatefulSets.md",
+    "studier/k8s-bok/6. Deployments/Deployments.md",
+    "studier/k8s-bok/KodeKloud-kurser kopplat till boken.md",
+    "studier/kodekloud-kurser/kurser.md.tmp.26745.1775148229131",
+    "studier/kodekloud-kurser/kurser.md.tmp.26745.1775148216789",
+    "studier/kodekloud-kurser/kurser.md.tmp.26745.1775148210168",
+    "anteckningar/Anteckningar med länkar.md",
+    "studier/skolprojekt/veckojournal/anteckningar/felsökning.md",
+    "3145/blog/drafts/00.32.deploying-stirling-pdf-with-kustomize.md",
+    "3145/blog/published/9.pre-commit-hooks-and-automated-releases.md",
+    "3145/homelab/kubernetes/apps/homepage/configmap.yaml.tmp.39559.1775147638399",
+    "3145/blog/drafts/32.deploying-stirling-pdf-with-kustomize.md",
+    "studier/Kubernetes/Ospecificerat, sortera!/kubernetes-resurser-lathund.md.md",
     "Lösa anteckningar att sortera.md",
-    "3145/blog/drafts/28.restructuring-ansible-and-automating-node-setup.md",
-    "3145/blog/drafts/27.hardening-proxmox-hosts.md",
-    "3145/homelab/kubernetes/apps/homepage/configmap.yaml.tmp.20901.1774726174545",
-    "3145/homelab/kubernetes/infrastructure/grafana-dashboards/cluster-overview.json",
-    "3145/homelab/kubernetes/infrastructure/grafana-dashboards/cluster-overview.json.tmp.20901.1774720036231",
-    "3145/homelab/kubernetes/infrastructure/grafana-dashboards",
-    "studier/k8s-bok/0.thekubernetesbook.pdf",
-    "3145/homelab/kubernetes/infrastructure/argocd/patches/argocd-cm-kustomize.yaml.tmp.56652.1774653372187",
-    "3145/homelab/kubernetes/infrastructure/argocd/patches/argocd-cm-kustomize.yaml",
-    "3145/homelab/kubernetes/infrastructure/argocd/patches/argocd-cm-kustomize.yaml.tmp.56652.1774652119170",
-    "anteckningar/Welcome.md",
-    "3145/homelab/ansible/inventory/hosts.yaml.tmp.56652.1774647208898",
-    "3145/homelab/ansible/roles/common/tasks/main.yaml.tmp.56652.1774647094437",
-    "3145/blog/drafts/26.adding-a-second-proxmox-node.md",
-    "3145/blog/drafts/00.28.restructuring-ansible-and-automating-node-setup.md",
-    "3145/blog/drafts/00.27.hardening-proxmox-hosts.md",
-    "3145/blog/drafts/00.26.adding-a-second-proxmox-node.md",
-    "3145/blog/drafts/00.29.hardware-upgrade-swapping-the-pi.md",
-    "3145/blog/drafts/00.30.proxmox-cluster-with-ha-quorum.md",
-    "3145/blog/drafts/00.31.terraform-multi-node-proxmox.md",
-    "3145/blog/drafts/29b.hardware-upgrade-swapping-the-pi.md",
-    "3145/blog/drafts/00.30.terraform-multi-node-proxmox.md",
-    "3145/blog/drafts/00.29.proxmox-cluster-with-ha-quorum.md",
-    "3145/blog/drafts/30.terraform-multi-node-proxmox.md",
-    "3145/blog/drafts/29.proxmox-cluster-with-ha-quorum.md",
-    "3145/blog/published/8.backup-strategy-adr.md",
-    "3145/blog/published/7.exposing-services-with-cloudflare-tunnel-in-k3s.md",
-    "3145/homelab-hardware/network/vlans/overview.md",
-    "3145/homelab-hardware/hardware/power/ups.md",
-    "3145/homelab-hardware/hardware/network/router.md",
-    "3145/homelab-hardware/hardware/compute/workstation.md",
-    "3145/homelab-hardware/hardware/compute/pve2-lenovo.md",
-    "3145/homelab-hardware/hardware/compute/proxmox-server.md",
-    "3145/homelab-hardware/hardware/compute/media-pi.md"
+    "Namnlös 1.md",
+    "studier/skolprojekt/tdd/uppgift.md",
+    "studier/skolprojekt/nerds-and-norrmies/public/icons.svg",
+    "studier/skolprojekt/nerds-and-norrmies/public/favicon.svg",
+    "studier/kodekloud-kurser/kurser.md",
+    "studier/steg-för-steg.md",
+    "studier/uppgift.md",
+    "studier/skolprojekt/veckojournal/anteckningar/saker-att-kolla-upp.md",
+    "studier/skolprojekt/veckojournal/losa-ideer.md",
+    "studier/skolprojekt/tdd/README.md",
+    "studier/tdd/README.md",
+    "studier/k8s-bok/TKB/web-app/test/static/images/image.png",
+    "studier/k8s-bok/TKB/web-app/shield/static/images/image.png",
+    "studier/k8s-bok/TKB/web-app/hydra/static/images/image.png"
   ]
 }

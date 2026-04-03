@@ -202,6 +202,10 @@ echo -e ""
 echo -e "  \e[1;33mKubernetes\e[0m"
 echo -e "  \e[36mk\e[0m                  kubectl"
 echo -e "  \e[36mkns\e[0m                visa nuvarande namespace"
+echo -e "  \e[36mkn\e[0m <ns>            byt namespace"
+echo -e "  \e[36mkctx\e[0m               visa nuvarande context"
+echo -e "  \e[36mkct\e[0m <ctx>          byt context"
+echo -e ""
 echo -e "  \e[36mkubens\e[0m <ns>        byt namespace"
 echo -e "  \e[36mkubectx\e[0m <ctx>      byt kluster"
 echo -e ""
@@ -209,6 +213,7 @@ echo -e "  \e[1;33mÖvrigt\e[0m"
 echo -e "  \e[36mmd\e[0m <namn>          skapa mapp och gå in i den"
 echo -e "  \e[36mkalk\e[0m <uttryck>     miniräknare (ex: kalk 2*2)"
 echo -e "  \e[36mfd\e[0m <mönster>       sök filer (ex: fd .yaml)"
+echo -e "  \e[36mrg\e[0m <text>          sök i filer (ex: rg namespace)"
 
 
 
@@ -263,19 +268,21 @@ md() {
 
 
 
-alias k="kubectl"
-alias k8s-bok="ssh ubuntu@192.168.10.51"
-alias kns="kubectl config view --minify | grep namespace"
-
 # =========================================================
 # 8. GIT ALIASES
 # =========================================================
 # Info
-alias gs="git status --short --branch"
-alias gb="git fetch && git branch -a"
+alias gs="git status --short --branch"      # kort status + branch
+alias gb="git fetch && git branch -a"       # uppdatera och lista alla branches
 
 # Navigera
-alias gsw="git switch"
+# alias gsw="git switch"                    # byt branch
+
+# Byt branch och visa status direkt. Stödjer flaggor tex gsw -c ny-branch
+unalias gsw 2>/dev/null
+gsw() {
+  git switch "$@" && git status --short --branch
+}
 
 # Staging & commit
 alias ga="git add"
@@ -284,9 +291,9 @@ alias gcm='git commit -m'
 alias gundo="git undo"
 
 # Remote
-alias gp="git push"
-alias gpl="git pull --rebase"
-
+# Pusha och sätt upstream automatiskt (slipp -u origin branch-name)
+alias gp="git push -u origin HEAD"
+alias gpl="git pull --rebase --autostash"
 
 
 gfz() {
@@ -298,6 +305,22 @@ gfz() {
 
 
 
+# =========================================================
+# 9. KUBERNETES ALIASES
+# =========================================================
+
+alias k="kubectl"
+alias kns="kubectl config view --minify | grep namespace"
+alias kn='kubectl config set-context --current --namespace'
+alias kctx='kubectl config current-context'
+alias kct='kubectl config use-context'
+
+
+
+
+# Osorterad
 
 alias tree="tree -L"
 alias homelab="cd /home/thomas/dev/3145"
+
+
