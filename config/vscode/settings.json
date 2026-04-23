@@ -134,5 +134,6 @@
     "redhat.telemetry.enabled": true,
     "yaml.schemas": {
         "kubernetes": "*.yaml"
-    }
+    },
+    "chat.disableAIFeatures": true
 }

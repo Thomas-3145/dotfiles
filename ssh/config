@@ -13,19 +13,31 @@ Host pve1
     HostName pve1.taild78f1d.ts.net
     User root
     IdentityFile ~/.ssh/id_rsa_4096
-    Port 22456
+    Port 22
 
 Host pve2
     HostName pve2.taild78f1d.ts.net
     User root
     IdentityFile ~/.ssh/id_rsa_4096
-    Port 22456
+    Port 22
+
+Host pve3
+    HostName pve3.taild78f1d.ts.net
+    User root
+    IdentityFile ~/.ssh/id_rsa_4096
+    Port 22
 
 Host router
     HostName 192.168.8.1
     User root
     IdentityFile ~/.ssh/id_rsa_4096
 	Port 22456
+
+Host gitlab-runner
+    HostName 192.168.10.31
+    User ubuntu
+    IdentityFile ~/.ssh/id_rsa_4096
+    Port 22456
 
 Host ssh_Github
     HostName Github.com
