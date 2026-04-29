@@ -294,7 +294,7 @@ unalias gsw 2>/dev/null
 gsw() {
   if [ $# -eq 0 ]; then
     local out query branch
-    out=$(git branch --all | grep -v HEAD \
+    out=$(git branch --all --no-color | grep -v HEAD \
       | fzf-tmux -d 20 +m --print-query \
           --header="Enter=byt | skriv nytt namn + Enter=skapa") || return 1
     [[ -z "$out" ]] && return 1
@@ -401,3 +401,7 @@ alias homelab="cd /home/thomas/dev/3145"
 # =========================================================
 source ~/.kube-ps1/kube-ps1.sh
 PROMPT='$(kube_ps1)'$PROMPT
+
+
+
+alias ai-dator="ssh -p 22 root@192.168.10.34"

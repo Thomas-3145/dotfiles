@@ -20,67 +20,26 @@
             }
           },
           {
-            "id": "29a3a68acd9aefcb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ClusterIP, NodePort och LoadBalancer"
-            }
-          },
-          {
             "id": "49e1ff5297e0bc31",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "studier/k8s-bok/7. Kubernetes Services/Labels och EndpointSlices.md",
+                "file": "studier/k8s-bok/10. Service discovery deep dive/Service Discovery.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Labels och EndpointSlices"
-            }
-          },
-          {
-            "id": "2924eacc9765a797",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "LIA-material/LIA-intervju.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "LIA-intervju"
+              "title": "Service Discovery"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "bc8d3be7bcfbb167",
         "type": "tabs",
         "children": [
-          {
-            "id": "9c21302274c39833",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Att göra;.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Att göra;"
-            }
-          },
           {
             "id": "269e591acc2f7156",
             "type": "leaf",
@@ -120,37 +79,9 @@
               "icon": "lucide-file",
               "title": "Föreläsning, kap 7"
             }
-          },
-          {
-            "id": "0a696980b8cf54b4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "LIA-material/LIA-intervju.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "LIA-intervju"
-            }
-          },
-          {
-            "id": "f19fd6759fb2d576",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Att göra;.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Att göra;"
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -312,28 +243,31 @@
       "bases:Skapa ny bas": false
     }
   },
-  "active": "3a62e8862e7f6757",
+  "active": "49e1ff5297e0bc31",
   "lastOpenFiles": [
-    "3145/blog/published/15.monitoring-with-prometheus-grafana-and-loki.md",
-    "studier/skolprojekt/nerds-and-norrmies/README.md.tmp.36259.1776867877948",
-    "studier/skolprojekt/nerds-and-norrmies/README.md.tmp.36259.1776867122029",
-    "studier/skolprojekt/nerds-and-norrmies/README.md.tmp.36259.1776865958795",
-    "studier/skolprojekt/veckojournal/veckojournaler/v17.md.tmp.36259.1776864692817",
-    "studier/skolprojekt/veckojournal/veckojournaler/v17.md",
-    "studier/skolprojekt/nerds-and-norrmies/docker-compose.yml",
-    "Att göra;.md",
-    "studier/k8s-bok/0.thekubernetesbook.pdf",
-    "LIA-material/LIA-intervju.md",
-    "LIA-material/LIA.md",
-    "LIA-material",
     "studier/k8s-bok/KodeKloud-kurser kopplat till boken.md",
-    "studier/skolprojekt/nerds-and-norrmies/frontend/src/pages/ReflectPage/ReflectPage.tsx",
-    "studier/skolprojekt/nerds-and-norrmies/frontend/src/pages/ReflectPage",
-    "studier/skolprojekt/nerds-and-norrmies/frontend/src/pages/LogPage/LogPage.tsx",
-    "Föreläsning, kap 7.md",
+    "studier/k8s-bok/10. Service discovery deep dive/Service Discovery.md",
+    "studier/k8s-bok/0.thekubernetesbook.pdf",
     "studier/k8s-bok/8. Ingress/Ingress.md",
-    "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
+    "3145/homelab/router/cloudflared/docker-compose.yaml",
+    "3145/homelab/router/cloudflared/docker-compose.yaml.tmp.112037.1777146993094",
+    "3145/homelab/router/cloudflared/config.yaml",
+    "3145/homelab/router/cloudflared/config.yaml.tmp.112037.1777145561613",
+    "3145/homelab/router/cloudflared",
+    "3145/blog/published/0.contact.md.tmp.97773.1777135798700",
+    "3145/blog/published/0.projects.md.tmp.97773.1777135758756",
+    "3145/blog/published/0.projects.md.tmp.97773.1777135727121",
+    "3145/blog/published/0.about-me.md.tmp.97773.1777135615772",
+    "3145/blog/published/16.alerting-with-ntfy-and-prometheusrules.md",
+    "3145/blog/published16.alerting-with-ntfy-and-prometheusrules.md",
     "studier/k8s-bok/7. Kubernetes Services/Labels och EndpointSlices.md",
+    "LIA-material/LIA-intervju.md",
+    "studier/k8s-bok/7. Kubernetes Services/ClusterIP, NodePort och LoadBalancer.md",
+    "Föreläsning, kap 7.md",
+    "Att göra;.md",
+    "3145/blog/published/15.monitoring-with-prometheus-grafana-and-loki.md",
+    "studier/skolprojekt/veckojournal/veckojournaler/v17.md",
+    "LIA-material/LIA.md",
     "Namnlös.md",
     "studier/k8s-bok/1/Kubernetes - Bakgrund och Historia.md",
     "3145/homelab/docs/archive/migration-pve3-disk-restructure.md",
@@ -346,10 +280,6 @@
     "Kubernetes/k8s-bok/7/ClusterIP, NodePort och LoadBalancer.md",
     "studier/k8s-bok/6. Deployments/Deployments.md",
     "studier/skolprojekt/Continuous Deployment/kvar-att-gora.md",
-    "studier/skolprojekt/portainer.md",
-    "studier/k8s-bok/6. Deployments/Pods, Deployments & StatefulSets.md",
-    "Artiklar att läsa.md",
-    "Föreläsning 1.md",
     "studier/skolprojekt/nerds-and-norrmies/public/icons.svg",
     "studier/skolprojekt/nerds-and-norrmies/public/favicon.svg",
     "studier/k8s-bok/TKB/web-app/test/static/images/image.png",
